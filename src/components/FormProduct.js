@@ -1,18 +1,26 @@
-import { useForm } from "react-hook-form";
+import { useRef } from "react";
+import { addProduct } from "@services/api/product";
 
 export default function FormProduct() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const formRef = useRef(null);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(formRef.current);
+    const data = {
+      title: formData.get("title"),
+      price: parseInt(formData.get("price")),
+      description: formData.get("description"),
+      categoryId: parseInt(formData.get("category")),
+      images: [formData.get("images").name],
+    };
+    addProduct(data).then((response) => {
+      console.log(response);
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form ref={formRef} onSubmit={handleSubmit}>
       <div className="overflow-hidden">
         <div className="px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
@@ -24,17 +32,11 @@ export default function FormProduct() {
                 Title
               </label>
               <input
-                {...register("title", { required: true })}
                 type="text"
                 name="title"
                 id="title"
-                className={`${
-                  errors.title && `border-red-500`
-                } mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md`}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
-              {errors.title?.type === "required" && (
-                <p className="text-red-500 text-xs italic">Title is required</p>
-              )}
             </div>
             <div className="col-span-6 sm:col-span-3">
               <label
@@ -44,17 +46,11 @@ export default function FormProduct() {
                 Price
               </label>
               <input
-                {...register("price", { required: true })}
                 type="number"
                 name="price"
                 id="price"
-                className={`${
-                  errors.price && `border-red-500`
-                } mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md`}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
-              {errors.price?.type === "required" && (
-                <p className="text-red-500 text-xs italic">Price is required</p>
-              )}
             </div>
             <div className="col-span-6">
               <label
@@ -64,13 +60,10 @@ export default function FormProduct() {
                 Category
               </label>
               <select
-                {...register("category", { required: true })}
                 id="category"
                 name="category"
                 autoComplete="category-name"
-                className={`${
-                  errors.category && `border-red-500`
-                } mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
                 <option value="1">Clothes</option>
                 <option value="2">Electronics</option>
@@ -78,11 +71,6 @@ export default function FormProduct() {
                 <option value="4">Toys</option>
                 <option value="5">Others</option>
               </select>
-              {errors.category?.name === "required" && (
-                <p className="text-red-500 text-xs italic">
-                  Category is required
-                </p>
-              )}
             </div>
 
             <div className="col-span-6">
@@ -93,20 +81,12 @@ export default function FormProduct() {
                 Description
               </label>
               <textarea
-                {...register("description", { required: true })}
                 name="description"
                 id="description"
                 autoComplete="description"
                 rows="3"
-                className={`${
-                  errors.description && `border-red-500`
-                } form-textarea mt-1 block w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md`}
+                className="form-textarea mt-1 block w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
-              {errors.description && (
-                <p className="text-red-500 text-xs italic">
-                  Description is required
-                </p>
-              )}
             </div>
             <div className="col-span-6">
               <div>
