@@ -17,22 +17,20 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
-  const signIng = async (email, password) => {
+  const signIn = async (email, password) => {
     const options = {
       headers: {
         accept: "*/*",
         "Content-Type": "application/json",
       },
     };
-    const { data: access_token } = await axios.post(
-      endPoints.auth.login,
-      { email, password },
-      options
-    );
+    const {
+      data: { access_token },
+    } = await axios.post(endPoints.auth.login, { email, password }, options);
     console.log(access_token);
   };
   return {
     user,
-    signIng,
+    signIn,
   };
 }
