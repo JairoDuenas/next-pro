@@ -9,8 +9,7 @@ const endPoints = {
   products: {
     getProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
     allProducts: `${API}/api/${VERSION}/products/`,
-    getProducts: (limit, offset) =>
-      `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
+    getProducts: (limit, offset) => `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
     addProducts: `${API}/api/${VERSION}/products`,
     updateProducts: (id) => `${API}/api/${VERSION}/products/${id}/`,
     deleteProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
@@ -18,8 +17,7 @@ const endPoints = {
   categories: {
     getCategoriesList: `${API}/api/${VERSION}/categories/`,
     addCategory: `${API}/api/${VERSION}/categories/`,
-    getCategoryItems: (id) =>
-      `${API}/api/${VERSION}/categories/${id}/products/`,
+    getCategoryItems: (id) => `${API}/api/${VERSION}/categories/${id}/products/`,
     updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
   },
   files: {
