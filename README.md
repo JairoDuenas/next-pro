@@ -1,3 +1,8 @@
+# Proyecto del Curso Profesional de Next.js y deploy en Vercel
+![Captura de next optimizacion y deploy](.readme-static/Captura-next-pro.png)
+
+[Ver la app en producción](https://next-a910123lb-jairoduenas.vercel.app/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
